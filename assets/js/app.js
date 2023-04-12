@@ -10,6 +10,30 @@
 
 // Fetch og log dem med fetch
 
+const users = document.querySelector(".users")
+
+fetch("https://randomuser.me/api/?results=10&nat=dk")
+  .then(res => res.json())
+  .then(data => {
+
+    for (let i = 0; i < data.results.length; i++) {
+      console.log(data)
+      const newArticle = document.createElement("article")
+      const newH4 = document.createElement("h4")
+      const newImg = document.createElement("img")
+
+      newH4.textContent = `${data.results[i].name.first} ${data.results[i].name.last}`
+      newImg.setAttribute("src", data.results[i].picture.medium)
+
+      users.append(newArticle)
+      newArticle.append(newH4)
+      newArticle.append(newImg)
+    }
+
+  })
+  .catch(err => console.log("An error occured (API): ", err))
+
+
 // Prøv nu at kopiere og omskrive det til async/await (Mark viser hvordan)
 
 //
